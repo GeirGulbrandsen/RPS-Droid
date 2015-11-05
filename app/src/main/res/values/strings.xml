@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">RPS-Droid</string>
+    <string name="swPlayer">Player</string>
+    <string name="swComputer">Computer</string>
+    <string name="txtOpponentType">vs. Computer</string>
+    <string name="lblPlayer1">Player1</string>
+    <string name="lblPlayer2">Player2</string>
+    <string name="txtPlayer2Name">Skynet</string>
+    <string name="btnPlay">PLAY</string>
+    <string name="lblResults">Results</string>
+
+    <string-array name="attacks_array">
+        <item>Rock</item>
+        <item>Paper</item>
+        <item>Scissors</item>
+        <!--<item>Lizard</item>-->
+        <!--<item>Spock</item>-->
+    </string-array>
+
+</resources>
