@@ -2,7 +2,6 @@ package com.plusonetesting.rockpaperscissors;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,27 +24,27 @@ public class MainActivity extends AppCompatActivity {
         final TextView txtP1Attack = (TextView) findViewById(R.id.txtP1Attack);
         final TextView txtP2Attack = (TextView) findViewById(R.id.txtP2Attack);
 
-
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.attacks_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnrAttack.setAdapter(adapter);
-        spnrAttack.setSelection(2,true);
+        spnrAttack.setSelection(2, true);
 
-        if (swPlayer.isChecked()) {
-            txtResult.setText("Checked");
-        }
-        else {
-            txtResult.setText(spnrAttack.getSelectedItem().toString());
-        }
+        final Player player1 = new Player();
+        player1.setName("Player");
+        final Player player2 = new Player();
+        player2.setName("Skynet");
+
 
         swPlayer.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     spnrAttack.setEnabled(false);
+                    player1.setName("Android");
                 } else {
                     spnrAttack.setEnabled(true);
+                    player1.setName("Player");
                 }
             }
         });
@@ -54,27 +53,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (swPlayer.isChecked()) {
-                    txtP1Attack.setText(adapter.getItem((int) (Math.random() * adapter.getCount())));
+                    player1.setAttack((String) adapter.getItem((int) (Math.random() * adapter.getCount())));
                 } else {
-                    txtP1Attack.setText(spnrAttack.getSelectedItem().toString());
+                    player1.setAttack(spnrAttack.getSelectedItem().toString());
                 }
-                txtP2Attack.setText(adapter.getItem((int) (Math.random() * adapter.getCount())));
+                player2.setAttack((String) adapter.getItem((int) (Math.random() * adapter.getCount())));
 
-//                switch ((String) txtP1Attack.getText()){
-//                    case "Rock":
-//
-//                        break;
-//
-//                    case "Paper":
-//                        break;
-//
-//                    case "Scissors":
-//                        break;
-//                    default:
-//                        break;
-//                }
+                txtP1Attack.setText(player1.getAttack());
+                txtP2Attack.setText(player2.getAttack());
+                txtResult.setText(evaluate(player1, player2));
             }
         });
+    }
+
+    public String evaluate(Player player1, Player player2) {
+        String result;
+
+        if (player1.getAttack().equals(player2.getAttack())) {
+            result = "It's a tie.";
+        } else {
+            if (player1.getWinsOver().equals(player2.getAttack())) {
+                result = player1.getName() + " wins!!";
+
+            } else result = player2.getName() + " wins!!";
+        }
+        return result;
 
     }
 }

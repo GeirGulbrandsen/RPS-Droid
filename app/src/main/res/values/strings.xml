@@ -8,6 +8,8 @@
     <string name="txtPlayer2Name">Skynet</string>
     <string name="btnPlay">PLAY</string>
     <string name="lblResults">Results</string>
+    <string name="txtP1Weapon">Weapon1</string>
+    <string name="txtP2Weapon">Weapon2</string>
 
     <string-array name="attacks_array">
         <item>Rock</item>
